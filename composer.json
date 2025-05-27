@@ -1,0 +1,45 @@
+{
+    "name": "letraceursnork/copyright-year-range",
+    "description": "Lightweight PHP library to generate dynamic copyright year ranges",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "LeTraceurSnork\\CopyrightYearRange\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "LeTraceurSnork",
+            "email": "le_traceur_snork@mail.ru"
+        }
+    ],
+    "minimum-stability": "stable",
+    "config": {
+        "sort-packages": true
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.75",
+        "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.1"
+    },
+    "scripts": {
+        "phpstan": "@php ./vendor/bin/phpstan analyze -c phpstan.neon --no-progress --ansi --verbose",
+        "phpunit": "@php ./vendor/bin/phpunit ./tests --no-coverage --color=always",
+        "php-cs-fixer-fix": "@php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php",
+        "php-cs-fixer-check": "@php ./vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --dry-run --diff",
+        "test": [
+            "@php-cs-fixer-check",
+            "@phpstan",
+            "@phpunit"
+        ],
+        "fix": [
+            "@php-cs-fixer-fix"
+        ]
+    }
+}

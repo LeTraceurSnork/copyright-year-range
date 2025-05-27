@@ -1,0 +1,8 @@
+# IDEs folders
+.idea/
+
+# Vendors
+/vendor/
+
+# Caches
+*.cache
