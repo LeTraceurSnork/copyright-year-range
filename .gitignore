@@ -5,4 +5,6 @@
 /vendor/
 
 # Caches
+./tests/clover/
+./tests/report/
 *.cache

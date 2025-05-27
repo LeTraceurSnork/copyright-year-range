@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests;
+
 use LeTraceurSnork\CopyrightYearRange\CopyrightHelper;
 use PHPUnit\Framework\TestCase;
 

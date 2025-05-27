@@ -1,41 +1,36 @@
-name: CI
+name: PHPUnit Tests with Coverage
 
 on:
   push:
     branches: [ main, develop ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
 
 jobs:
   test:
-    name: PHP 8.3 Tests & Analysis
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
 
-      - name: Setup PHP 8.3
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: "8.3"
+          php-version: '8.3'
+          coverage: pcov
           tools: composer
-          coverage: pcov  # Для генерации покрытия
 
       - name: Install dependencies
-        run: composer install --no-interaction
-
-      - name: Run PHPUnit
-        run: composer phpunit
-
-      - name: Run PHPStan
-        run: composer phpstan
-
-      - name: Run PHP-CS-Fixer
-        run: composer php-cs-fixer-check
-
-      - name: Upload coverage to Coveralls (optional)
-        if: success() && github.event_name == 'push'
-        env:
-          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
         run: |
-          composer require php-coveralls/php-coveralls --dev
-          php vendor/bin/php-coveralls -v
+          composer install --prefer-dist --no-progress
+
+      - name: Run PHPUnit with coverage
+        run: composer phpunit-clover
+
+      - name: Upload coverage results to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          composer global require php-coveralls/php-coveralls
+          php-coveralls --coverage_clover=build/logs/clover.xml -v
