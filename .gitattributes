@@ -4,5 +4,7 @@ tests/                 export-ignore
 .gitignore             export-ignore
 .gitattributes         export-ignore
 .php-cs-fixer.dist.php export-ignore
+ASSURANCE.md           export-ignore
+LICENSE                export-ignore
 phpstan.neon           export-ignore
 phpunit.xml            export-ignore
